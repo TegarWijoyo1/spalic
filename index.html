@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring Sistem Pemadam Kebakaran</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Menyembunyikan semua bagian konten secara default */
+        .section {
+            display: none;
+        }
+
+        /* Mengatur teks agar berada di tengah */
+        .center-text {
+            text-align: center;
+        }
+
+        /* Menempatkan konten di tengah layar (vertikal dan horizontal) */
+        .center-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Menambah margin pada setiap bagian */
+        section {
+            margin-top: 30px;
+        }
+
+        /* Menambahkan format justify untuk teks */
+        .justify-text {
+            text-align: justify;
+        }
+
+        /* Gambar responsive */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Menyesuaikan ukuran pada perangkat mobile */
+        @media (max-width: 768px) {
+            .navbar-brand img {
+                width: 30px;
+                height: 30px;
+            }
+            .card-title {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <!-- Logo -->
+                <img src="spalic-logo-alt.svg" alt="Logo" class="me-2" style="width: 40px; height: 40px;">
+                SPALIC (Sistem Pemadam Kebakaran Gedung Perkuliahan Otomatis Berbasis PLC)
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showSection('home')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('data-monitoring')">Data Monitoring</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('peringatan')">Peringatan</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="container mt-4 section">
+        <div class="center-text">
+            <h2>Deskripsi Alat</h2>
+        </div>
+        <div class="justify-text">
+            <p>
+                Sistem pemadam kebakaran gedung perkuliahan otomatis berbasis Programmable Logic Controller (SPALIC) merupakan sebuah alat yang dirancang khusus untuk membantu mendeteksi dan memadamkan kebakaran secara otomatis pada gedung laboratorium teknik 3. Sistem ini dibuat dengan tujuan untuk meningkatkan keamanan dan keselamatan penghuni gedung laboratorium teknik 3 melalui pencegahan dan pemadam kebakaran yang cepat dan efektif, serta memantau kondisi ruangan di gedung perkuliahan melalui website yang dapat diakses oleh pengguna sehingga penghuni gedung laboratorium teknik 3 tidak perlu bergantung pada penanggulangan kebakaran secara manual. Sistem ini menggunakan Programmable Logic Controller (PLC) tipe omron cp1e sebagai kontrol utama yang berfungsi untuk menerima respons dari hasil pembacaan sensor suhu, sensor asap, dan sensor tekanan dari mikrokontroller sehingga jika terdeteksi tanda-tanda kebakaran pada sebuah gedung perkuliahan, PLC akan mengambil tindakan untuk menghidupkan alarm sebagai tanda bahaya dan menghidupkan pompa untuk memadamkan api melalui sprinkle. Mikrokontroller berfungsi sebagai penghubung antara sensor-sensor dan PLC sekaligus untuk pembacaan kondisi lingkungan gedung laboratorium teknik 3 yang akan ditampilkan pada website sebagai pemantauan kondisi gedung yang dapat diakses oleh pengguna. Alat SPALIC memiliki keunggulan dibandingkan dengan sistem pemadam api yang konvensional yang hanya menggunakan perangkat keras atau elektronik sederhana yang hanya dapat memberikan informasi dasar seperti kondisi alarm saat aktif atau pada saat non-aktif sehingga kurang fleksibel, berbeda dengan SPALIC yang dapat memonitoring kondisi ruangan gedung laboratorium teknik 3 dari jarak jauh melalui website yang dapat diakses oleh pengguna sehingga lebih fleksibel.
+            </p>
+        </div>
+    </section>
+
+    <!-- Data Monitoring Section -->
+    <section id="data-monitoring" class="container mt-4 section center-content">
+        <div class="center-text">
+            <h2>Data Monitoring</h2>
+
+            <!-- Baris Pertama -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card text-white bg-info mb-3">
+                        <div class="card-header">Suhu Ruangan</div>
+                        <div class="card-body">
+                            <h5 class="card-title" id="suhu-ruangan">25°C</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card text-white bg-success mb-3">
+                        <div class="card-header">Status Alat</div>
+                        <div class="card-body">
+                            <h5 class="card-title" id="status-alat">Aktif</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Baris Kedua -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card text-white bg-warning mb-3">
+                        <div class="card-header">Intensitas Asap</div>
+                        <div class="card-body">
+                            <h5 class="card-title" id="intensitas-asap">Normal</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card text-white bg-primary mb-3">
+                        <div class="card-header">Tekanan Air</div>
+                        <div class="card-body">
+                            <h5 class="card-title" id="tekanan-air">Normal</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabel Data -->
+            <h2 class="mt-4">Data Detail</h2>
+            <table class="table table-striped table-bordered mt-3">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Waktu</th>
+                        <th>Status Sistem</th>
+                        <th>Temperatur (°C)</th>
+                        <th>Intensitas Asap</th>
+                        <th>Tekanan Air</th>
+                    </tr>
+                </thead>
+                <tbody id="data-table">
+                    <!-- Data dari ESP32 akan ditampilkan di sini -->
+                    <tr>
+                        <td>12:00</td>
+                        <td>Aktif</td>
+                        <td>30</td>
+                        <td>Normal</td>
+                        <td>Normal</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Peringatan Section -->
+    <section id="peringatan" class="container mt-4 section center-content">
+        <div class="center-text">
+            <h2>Peringatan / Alarm</h2>
+            <p>Semua peringatan atau alarm akan ditampilkan di sini jika ada kejadian darurat yang terdeteksi oleh sistem, seperti suhu tinggi, intensitas asap berlebih, atau tekanan air menurun.</p>
+            <div class="alert alert-danger" role="alert">
+                <strong>Peringatan!</strong> Terdeteksi suhu tinggi pada ruangan.
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Fungsi untuk menampilkan bagian yang dipilih dan menyembunyikan lainnya
+        function showSection(sectionId) {
+            // Menyembunyikan semua bagian
+            var sections = document.querySelectorAll('.section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+
+            // Menampilkan bagian yang dipilih
+            var selectedSection = document.getElementById(sectionId);
+            selectedSection.style.display = 'block';
+        }
+
+        // Menampilkan bagian pertama (Home) ketika halaman dimuat
+        window.onload = function() {
+            showSection('home');
+        };
+    </script>
+</body>
+</html>
